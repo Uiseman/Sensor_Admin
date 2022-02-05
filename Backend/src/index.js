@@ -1,9 +1,10 @@
-const express= require ('express');
+const express=require('express');
+const routes= require('./routes');
+require('dotenv/config');
 
-const app = express();
 
-app.listen(3333);
+const app=express();
+app.use(express.json());
+app.use(routes);
 
-app.get('/',(req,res)=>{
-    res.send('Hello World');
-});
+app.listen(process.env.PORT||3333);

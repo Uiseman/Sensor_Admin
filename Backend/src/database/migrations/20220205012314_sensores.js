@@ -2,15 +2,21 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+
+
 exports.up = function(knex) {
+
   return knex.schema.createTable('sensors', function(table){
-    table.string('id').primary();
-    table.enu('voltage', ['3', '1.5']).notNullable();
-    table.enu('brand', ['A1', 'B3' , 'T10']).notNullable();
-    table.enu('type', ['temperatura', 'corrente elétrica', 'pressão',
+    table.increments('sensorID');
+    table.enum('voltage', ['3', '1.5']).notNullable();
+    table.enum('brand', ['A1', 'B3' , 'T10']).notNullable();
+    table.enum('type', ['temperatura', 'corrente elétrica', 'pressão',
      'intensidade luminosa', 'aceleração']).notNullable();
-     table.double('measure').notNullable();
-     table.geography('location').notNullable();
+     table.string('measure').notNullable();
+     table.double('height').notNullable();
+     table.double('width').notNullable();
+     table.double('length').notNullable();
+     table.geography('coordinates').notNullable();
   });
 };
 
@@ -19,5 +25,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  return knex.schema.dropTable('sensors');
+  return knex.schema.dropTableIfExists('sensors');
 };
