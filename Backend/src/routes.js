@@ -8,9 +8,10 @@ const SensorController=require('./controllers/SensorController');
 
 //rotas post
 
-routes.post('/sensor', SensorController.create);
-routes.post('/sensor/:id', SensorController.delete);
+routes.post('/create', SensorController.create);
+routes.post('/delete/:id', SensorController.delete);
+routes.post('/update/:id', SensorController.update);
 
 //rotas get
-routes.get('/sensor', SensorController.read);
+routes.get('/sensors', SensorController.read);
 module.exports=routes;
