@@ -33,10 +33,18 @@ async create(req,res){
 },
 
 async read(req,res){
-    const sensors = await conection('sensors').select('*');
+    const sensors = await conection('sensors').select('sensors.*',st.asGeoJSON('coordinates'));
 
     
         return res.json(sensors);
+},
+
+async readID(req,res){
+    const {id}=req.params;
+    const sensor = await conection('sensors').where('sensorID',id).
+    select('sensors.*',st.asGeoJSON('coordinates'));
+
+        return res.json(sensor);
 },
 
 async delete(req,res){
