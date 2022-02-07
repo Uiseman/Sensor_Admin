@@ -21,7 +21,7 @@ function scaleSize(value) { //define fator de escala
 
 const Thermo = ({ id, value, title }) => {
   return (
-    <div className="gauges">
+    <div className="gauges-thermo">
       <div className="gauges-title-thermo">{title}</div>
       <Thermometer
         theme="light"

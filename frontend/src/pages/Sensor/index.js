@@ -1,6 +1,6 @@
-import React, {useState,useEffect,Component} from 'react';
-import {useNavigate} from 'react-router-dom';
-import GoogleMapReact from 'google-map-react';
+import React, {useState,useEffect} from 'react';
+import {FiMapPin} from 'react-icons/fi';
+
 
 import Speedometer from '../resources/Speedometer';
 import Barometer from '../resources/Barometer';
@@ -16,9 +16,11 @@ import api from '../../services/api';
 
 export default function Sensor(){
 
-    const navigate= useNavigate();
+
     const sensorID=localStorage.getItem('sensorID');
     const [sensor,setSensor]=useState({});
+    const[latitude,setLatitude]=useState('');
+    const[longitude,setLongitude]=useState('');
 
     useEffect(()=>{
 
@@ -26,6 +28,8 @@ export default function Sensor(){
             
 
             setSensor(response.data[0]);
+            setLatitude(JSON.parse(sensor.coordinates).coordinates[0]);
+            setLongitude(JSON.parse(sensor.coordinates).coordinates[1])
         });
         
     },[sensorID,sensor,sensor.measure]);
@@ -75,7 +79,10 @@ export default function Sensor(){
 
                 <div className="indications">
                     {indicationSwitch(sensor)}
-
+                    <div className="local">
+                            <FiMapPin size={30} color="cc0000"/>
+                            <p>(latitude: {latitude}, longitude: {longitude})</p>
+                        </div>
                 </div>
             </div>         
        
