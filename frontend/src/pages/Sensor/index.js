@@ -1,8 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,Component} from 'react';
 import {useNavigate} from 'react-router-dom';
+import GoogleMapReact from 'google-map-react';
+
 import Speedometer from '../resources/Speedometer';
 import Barometer from '../resources/Barometer';
 import Amperemeter from '../resources/Amperemeter';
+import Thermo from '../resources/Thermometer';
+import Lightmeter from '../resources/Lightmeter';
 
 import './styles.css';
 import api from '../../services/api';
@@ -24,7 +28,7 @@ export default function Sensor(){
             setSensor(response.data[0]);
         });
         
-    },[sensorID,sensor]);
+    },[sensorID,sensor,sensor.measure]);
 
    function indicationSwitch(object) {
         switch(object.type) {
@@ -43,8 +47,18 @@ export default function Sensor(){
                     id={object.sensorID}
                     value={object.measure}
                     title="Corrente (A)"/>);
-          default:
-            return 'foo';
+            case 'temperatura':
+                return(<Thermo
+                    id={object.sensorID}
+                    value={object.measure}
+                    title="Temperatura (°C)"/>);
+            case 'intensidade luminosa':
+                return(<Lightmeter
+                        id={object.sensorID}
+                        value={object.measure}
+                        title="Intensidade (cd)"/>);
+            default:
+            return object.measure;
         }
       }
 
@@ -61,6 +75,7 @@ export default function Sensor(){
 
                 <div className="indications">
                     {indicationSwitch(sensor)}
+
                 </div>
             </div>         
        
