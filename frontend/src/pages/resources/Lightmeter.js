@@ -3,21 +3,21 @@ import ReactSpeedometer from "react-d3-speedometer";
 
 
 
-
-const Amperemeter = ({ id, value, title }) => {
-   
+const Lightmeter = ({ id, value, title }) => {
+  
 
   return (
+   
     
     <div className="gauges">
         <div className="gauges-title">{title}</div>
         <ReactSpeedometer
             maxValue={5*(value)}
-            minValue={-5*(value)}
+            minValue={0}
             value={value}
             needleTransition="easeQuadIn"
             needleTransitionDuration={1000}
-            needleColor="red"
+            needleColor="black"
             valueTextFontSize="20px"
             labelFontSize="15px"
             width={400}
@@ -25,13 +25,13 @@ const Amperemeter = ({ id, value, title }) => {
             paddingVertical={15}
             paddingHorizontal={15}
             textColor="#333"
-            ringWidth={5}
-            startColor="#333"
+            ringWidth={10}
+            startColor="#f9d976"
             segments={10}
-            endColor="#333"
+            endColor="#FFC300"
          />
     </div>
   );
 };
 
-export default Amperemeter;
+export default Lightmeter;

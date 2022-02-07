@@ -1,17 +1,7 @@
 import React from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
-function scaleSize(value) { //define fator de escala
 
-  if(Math.abs(value)<2) {
-    return(2);
-  } 
-  else if(Math.abs(value)<5) {
-    return(5);
-  } else {
-    return(Math.abs(value)*5);
-  }
-}
 
 const Barometer = ({value,title}) => {
 
@@ -22,8 +12,8 @@ const Barometer = ({value,title}) => {
     <div className="gauges">
        <div className="gauges-title">{title}</div>
       <ReactSpeedometer
-        maxValue={1*scaleSize(value)}
-        minValue={-1*scaleSize(value)}
+        maxValue={5*(value)}
+        minValue={-5*(value)}
         value={value}
         needleTransition="easeQuadIn"
         needleTransitionDuration={1000}

@@ -1,8 +1,12 @@
 import React, {useState,useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {FiMapPin} from 'react-icons/fi';
+
+
 import Speedometer from '../resources/Speedometer';
 import Barometer from '../resources/Barometer';
 import Amperemeter from '../resources/Amperemeter';
+import Thermo from '../resources/Thermometer';
+import Lightmeter from '../resources/Lightmeter';
 
 import './styles.css';
 import api from '../../services/api';
@@ -12,9 +16,11 @@ import api from '../../services/api';
 
 export default function Sensor(){
 
-    const navigate= useNavigate();
+
     const sensorID=localStorage.getItem('sensorID');
     const [sensor,setSensor]=useState({});
+    const[latitude,setLatitude]=useState('');
+    const[longitude,setLongitude]=useState('');
 
     useEffect(()=>{
 
@@ -22,9 +28,11 @@ export default function Sensor(){
             
 
             setSensor(response.data[0]);
+            setLatitude(JSON.parse(sensor.coordinates).coordinates[0]);
+            setLongitude(JSON.parse(sensor.coordinates).coordinates[1])
         });
         
-    },[sensorID,sensor]);
+    },[sensorID,sensor,sensor.measure]);
 
    function indicationSwitch(object) {
         switch(object.type) {
@@ -43,8 +51,18 @@ export default function Sensor(){
                     id={object.sensorID}
                     value={object.measure}
                     title="Corrente (A)"/>);
-          default:
-            return 'foo';
+            case 'temperatura':
+                return(<Thermo
+                    id={object.sensorID}
+                    value={object.measure}
+                    title="Temperatura (°C)"/>);
+            case 'intensidade luminosa':
+                return(<Lightmeter
+                        id={object.sensorID}
+                        value={object.measure}
+                        title="Intensidade (cd)"/>);
+            default:
+            return object.measure;
         }
       }
 
@@ -61,6 +79,10 @@ export default function Sensor(){
 
                 <div className="indications">
                     {indicationSwitch(sensor)}
+                    <div className="local">
+                            <FiMapPin size={30} color="cc0000"/>
+                            <p>(latitude: {latitude}, longitude: {longitude})</p>
+                        </div>
                 </div>
             </div>         
        
