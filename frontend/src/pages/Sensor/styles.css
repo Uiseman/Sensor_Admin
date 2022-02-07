@@ -1,0 +1,32 @@
+.sensor-container {
+  width: 100%;
+  max-width: 1180px;
+  padding: 0 30px;
+  margin: 31px auto;
+}
+
+.basic-data {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.basic-data strong {
+  display: block;
+  margin-bottom: 16px;
+  color: #41414d;
+  font-size: 30px;
+}
+
+.basic-data p {
+  color: #737380;
+  line-height: 21px;
+  font-size: 20px;
+}
+
+.indications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

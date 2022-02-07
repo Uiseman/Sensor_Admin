@@ -1,18 +1,18 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
-import Admin from './pages/Admin';
+import Home from './pages/Home';
 import Sensor from './pages/Sensor';
 
 
 
-export default function Routes(){
+export default function Routing(){
     return (
         <BrowserRouter>
-        <Switch>
-            <Route path="/" exact component={Admin}/>
-            <Route path="/sensors" component={Sensor}/>
-        </Switch>
+        <Routes>
+            <Route path="/"  element={<Home/>}/>
+            <Route path="/sensor" element={<Sensor/>}/>
+        </Routes>
     </BrowserRouter>
     );
     

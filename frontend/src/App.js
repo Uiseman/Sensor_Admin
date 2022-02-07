@@ -2,12 +2,12 @@ import React from 'react';
 
 import './global.css'
 
-import Routes from './routes';
+import Routing from './routes';
 
 function App() {
  
   return (
-      <Routes/>
+      <Routing/>
     
   );
 }
